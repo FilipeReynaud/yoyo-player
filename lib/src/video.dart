@@ -80,11 +80,18 @@ class YoYoPlayer extends StatefulWidget {
     this.onpeningvideo,
   }) : super(key: key);
 
+  YoYoPlayerState state = YoYoPlayerState();
+
   @override
-  _YoYoPlayerState createState() => _YoYoPlayerState();
+  YoYoPlayerState createState() => state;
+
+  YoYoPlayerState getState(){
+    return this.state;
+  }
+
 }
 
-class _YoYoPlayerState extends State<YoYoPlayer>
+class YoYoPlayerState extends State<YoYoPlayer>
     with SingleTickerProviderStateMixin {
   //vieo play type (hls,mp4,mkv,offline)
   String playtype;
@@ -560,10 +567,13 @@ class _YoYoPlayerState extends State<YoYoPlayer>
 
       if (playtype == "MP4") {
         // Play MP4
-        controller = VideoPlayerController.network(url,formatHint: VideoFormat.other)..initialize();
+        controller =
+            VideoPlayerController.network(url, formatHint: VideoFormat.other)
+              ..initialize();
       } else if (playtype == "MKV") {
         controller =
-            VideoPlayerController.network(url,formatHint: VideoFormat.dash)..initialize();
+            VideoPlayerController.network(url, formatHint: VideoFormat.dash)
+              ..initialize();
       } else if (playtype == "HLS") {
         controller =
             VideoPlayerController.network(url, formatHint: VideoFormat.hls)
